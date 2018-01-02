@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `my_test_db`;
-USE `my_test_db`;
+CREATE DATABASE  IF NOT EXISTS `spring2mobile`;
+USE `spring2mobile`;
 
 CREATE TABLE IF NOT EXIST `user` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,

@@ -40,7 +40,7 @@ public class User {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "mUser", fetch = FetchType.LAZY)
 	private Set<Plot> mPlots = new HashSet<>();
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "mUSer", fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "mUser", fetch = FetchType.LAZY)
 	private Set<Group> mGroups = new HashSet<>();
 	
 	public void setId(Long id) {
