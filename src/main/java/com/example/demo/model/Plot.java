@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,9 +16,16 @@ public class Plot {
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "id")
     private Long mId;
+	
+	@Column(name = "name")
 	private String mName;
+	
+	@Column(name = "coordinates")
 	private String mCoordinates;
+	
+	@Column(name = "crop")
 	private String mCrop;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

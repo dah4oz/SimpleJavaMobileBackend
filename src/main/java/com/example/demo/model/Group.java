@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,7 +18,10 @@ public class Group {
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "id")
     private Long mId;
+	
+	@Column(name = "name")
 	private String mName;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

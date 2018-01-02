@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,11 +19,22 @@ public class User {
 
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "id")
     private Long mId;
+	
+	@Column(name = "name")
 	private String mName;
-	private String mAge;
+	
+	@Column(name = "age")
+	private int mAge;
+	
+	@Column(name = "email")
 	private String mEmail;
+	
+	@Column(name = "username")
 	private String mUsername;
+	
+	@Column(name = "password")
 	private String mPassword;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "mUser", fetch = FetchType.LAZY)
@@ -45,10 +57,10 @@ public class User {
 	public void setName(String name) {
 		this.mName = name;
 	}
-	public String getAge() {
+	public int getAge() {
 		return mAge;
 	}
-	public void setAge(String age) {
+	public void setAge(int age) {
 		this.mAge = age;
 	}
 	public String getEmail() {
