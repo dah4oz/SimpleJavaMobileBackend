@@ -3,6 +3,11 @@ package com.example.demo.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.GroupRepository;
@@ -12,7 +17,10 @@ import com.example.demo.model.Plot;
 import com.example.demo.model.User;
 
 @Service
+@Transactional
 public class UserService {
+	
+	private static final int PAGE_SIZE = 8;
 	
 	private UserRepository mUserRepository;
 
@@ -24,6 +32,11 @@ public class UserService {
 		List<User> users = new ArrayList<>();
 		mUserRepository.findAll().forEach(users::add);
 		return users;
+	}
+	
+	public Page<User> getUsers(int pageNum) {
+		PageRequest pageRequest = new PageRequest(pageNum - 1, PAGE_SIZE, Sort.Direction.ASC, "name");
+		return mUserRepository.findAll(pageRequest);
 	}
 	
 	public void addUser(User user) {

@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +22,7 @@ import com.example.demo.service.PlotService;
 import com.example.demo.service.UserService;
 
 @RestController
+@RequestMapping(value = "/user")
 public class UserController {
 	
 	private UserService mUserService;
@@ -42,9 +45,15 @@ public class UserController {
 		mPlotService = service;
 	}
 	
-	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	@RequestMapping
 	public List<User> getUsers() {
 		return mUserService.getAllUsers();
+	}
+	
+	@RequestMapping(value = "/part/{page}")
+	public List<User> getUserPage(@PathVariable Integer pageNumber) {
+		Page<User> userPage = mUserService.getUsers(pageNumber);
+		return userPage.getContent();
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
