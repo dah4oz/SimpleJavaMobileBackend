@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.Group;
 import com.example.demo.model.Plot;
 import com.example.demo.model.User;
+import com.example.demo.model.UserAgeStat;
 import com.example.demo.service.GroupService;
 import com.example.demo.service.PlotService;
 import com.example.demo.service.UserService;
@@ -60,6 +61,11 @@ public class UserController {
 	public ResponseEntity<String> addGroup(@RequestBody User user) {
 		mUserService.addUser(user);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
+	}
+	
+	@RequestMapping(value = "/ageCount")
+	public List<UserAgeStat> getUserAgeCount() {
+		return mUserService.getUserCountByAge();
 	}
 	
 	@RequestMapping(value = "/remove", method = RequestMethod.POST)

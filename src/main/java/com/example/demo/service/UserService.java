@@ -15,6 +15,7 @@ import com.example.demo.dao.UserRepository;
 import com.example.demo.model.Group;
 import com.example.demo.model.Plot;
 import com.example.demo.model.User;
+import com.example.demo.model.UserAgeStat;
 
 @Service
 @Transactional
@@ -37,6 +38,10 @@ public class UserService {
 	public Page<User> getUsers(int pageNum) {
 		PageRequest pageRequest = new PageRequest(pageNum - 1, PAGE_SIZE, Sort.Direction.ASC, "name");
 		return mUserRepository.findAll(pageRequest);
+	}
+	
+	public List<UserAgeStat> getUserCountByAge() {
+		return mUserRepository.countUsersByAge();
 	}
 	
 	public void addUser(User user) {
