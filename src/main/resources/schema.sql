@@ -1,7 +1,7 @@
 CREATE DATABASE  IF NOT EXISTS `spring2mobile`;
 USE `spring2mobile`;
 
-CREATE TABLE IF NOT EXIST `user` (
+CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `age` int(11) unsigned NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXIST `user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE IF NOT EXIST `group` (
+CREATE TABLE IF NOT EXISTS `group` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `user_id` int(11) unsigned DEFAULT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXIST `group` (
   CONSTRAINT `fk_group_groupuserid` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXIST `plot` (
+CREATE TABLE IF NOT EXISTS `plot` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `coordinates` varchar(255) DEFAULT NULL,
