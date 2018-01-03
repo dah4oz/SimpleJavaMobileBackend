@@ -6,6 +6,6 @@ import com.example.demo.model.User;
 
 public interface UserRepository extends PagingAndSortingRepository<User, Long>{
 	
-	
+	User findBymId(Long id);
 
 }

@@ -1,5 +1,8 @@
 package com.example.demo.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,13 +10,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ManyToAny;
 
 @Entity
-@Table(name = "group")
+@Table(name = "group_type")
 public class Group {
 	
 	@Id
@@ -24,9 +28,14 @@ public class Group {
 	@Column(name = "name")
 	private String mName;
 	
+	/*
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User mUser;
+	*/
+	
+	@ManyToMany(mappedBy = "mGroups")
+	private Set<User> mUsers = new HashSet<>();
 	
 	public void setId(Long id) {
 		this.mId = id;
@@ -44,12 +53,12 @@ public class Group {
 		this.mName = name;
 	}
 	
-	public User getUser() {
-		return mUser;
+	public Set<User> getUser() {
+		return mUsers;
 	}
 	
-	public void setUser(User user) {
-		this.mUser = user;
+	public void setUser(Set<User> users) {
+		this.mUsers = users;
 	}
 	
 }
