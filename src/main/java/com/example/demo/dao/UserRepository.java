@@ -12,7 +12,7 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long>{
 	
 	User findBymId(Long id);
 	
-	@Query(value = "SELECT COUNT(u) as counter, u.age FROM user u GROUP BY u.age", nativeQuery = true)
+	@Query(value = "SELECT new com.example.demo.model.UserAgeStat(u.mAge, count(u)) FROM User u GROUP BY u.mAge")
 	public List<UserAgeStat> countUsersByAge();
 
 }

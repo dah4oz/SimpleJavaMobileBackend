@@ -50,7 +50,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/part/{page}")
-	public List<User> getUserPage(@PathVariable Integer pageNumber) {
+	public List<User> getUserPage(@PathVariable("page") Integer pageNumber) {
 		Page<User> userPage = mUserService.getUsers(pageNumber);
 		return userPage.getContent();
 	}

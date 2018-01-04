@@ -44,7 +44,8 @@ public class UserService {
 	}
 	
 	public Page<User> getUsers(int pageNum) {
-		PageRequest pageRequest = new PageRequest(pageNum - 1, PAGE_SIZE, Sort.Direction.ASC, "name");
+		int page = pageNum < 1 ? 1 : pageNum;
+		PageRequest pageRequest = new PageRequest(page - 1, PAGE_SIZE, Sort.Direction.ASC, "mName");
 		return mUserRepository.findAll(pageRequest);
 	}
 	
