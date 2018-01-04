@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "plot")
 public class Plot {
@@ -30,6 +32,7 @@ public class Plot {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
+	@JsonIgnore
 	private User mUser;
 	
 	public void setId(Long id) {
@@ -64,6 +67,7 @@ public class Plot {
 		this.mCrop = crop;
 	}
 	
+	@JsonIgnore
 	public User getUser() {
 		return mUser;
 	}

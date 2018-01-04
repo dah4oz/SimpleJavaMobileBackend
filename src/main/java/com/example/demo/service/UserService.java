@@ -5,12 +5,13 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dao.GroupRepository;
 import com.example.demo.dao.UserRepository;
 import com.example.demo.model.Group;
 import com.example.demo.model.Plot;
@@ -24,9 +25,16 @@ public class UserService {
 	private static final int PAGE_SIZE = 8;
 	
 	private UserRepository mUserRepository;
+	
+	private BCryptPasswordEncoder mBCryptPasswordEncoder;
 
 	public UserService(UserRepository userRepository) {
 		this.mUserRepository = userRepository;
+	}
+	
+	@Autowired
+	public void setPasswordEncoder(BCryptPasswordEncoder passwordEncoder) {
+		mBCryptPasswordEncoder = passwordEncoder;
 	}
 	
 	public List<User> getAllUsers() {
@@ -45,6 +53,7 @@ public class UserService {
 	}
 	
 	public void addUser(User user) {
+		user.setPassword(mBCryptPasswordEncoder.encode(user.getPassword()));
 		mUserRepository.save(user);
 	}
 	
@@ -53,9 +62,12 @@ public class UserService {
 	}
 	
 	public User addGroupToUser(Long userId, Group group) {
+		User updatedUser = null;
 		User user = mUserRepository.findBymId(userId);
-		user.addGroup(group);
-		User updatedUser = mUserRepository.save(user);
+		if(user != null) {
+			user.addGroup(group);
+			updatedUser = mUserRepository.save(user);
+		}
 		
 		return updatedUser;
 	}
@@ -70,8 +82,11 @@ public class UserService {
 	
 	public User addPlotToUser(Long userId, Plot plot) {
 		User user = mUserRepository.findBymId(userId);
-		user.addPlot(plot);
-		User updatedUser = mUserRepository.save(user);
+		User updatedUser = null;
+		if(user != null) {
+			user.addPlot(plot);
+			updatedUser = mUserRepository.save(user);
+		}
 		
 		return updatedUser;
 	}
@@ -82,6 +97,10 @@ public class UserService {
 		User updatedUser = mUserRepository.save(user);
 		
 		return updatedUser;
+	}
+	
+	public User getUserById(Long userId) {
+		return mUserRepository.findBymId(userId);
 	}
 
 }

@@ -49,4 +49,10 @@ public class PlotService {
 		return mPlotRepository.findBymId(id);
 	}
 	
+	public void addUserIdToPlot(Long plotId, User user) {
+		Plot plot = mPlotRepository.findBymId(plotId);
+		plot.setUser(user);
+		mPlotRepository.save(plot);
+	}
+	
 }

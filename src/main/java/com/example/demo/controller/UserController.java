@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Group;
-import com.example.demo.model.Plot;
 import com.example.demo.model.User;
 import com.example.demo.model.UserAgeStat;
 import com.example.demo.service.GroupService;
@@ -90,10 +88,10 @@ public class UserController {
 	@RequestMapping(value = "/{userId}/add/plot", method = RequestMethod.POST)
 	public ResponseEntity<String> addPlotToUser(@PathVariable("userId") String userId, 
 			@RequestParam("plotId") String plotId) {
-		Plot plot = mPlotService.getPlotById(Long.valueOf(plotId));
+		User user = mUserService.getUserById(Long.valueOf(userId));
 		
-		if(plot != null) {
-			mUserService.addPlotToUser(Long.valueOf(userId), plot);
+		if(user != null) {
+			mPlotService.addUserIdToPlot(Long.valueOf(plotId), user);
 		}
 		
 		return ResponseEntity.status(HttpStatus.OK).build();

@@ -16,6 +16,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.ManyToAny;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "group_type")
 public class Group {
@@ -35,6 +37,7 @@ public class Group {
 	*/
 	
 	@ManyToMany(mappedBy = "mGroups")
+	@JsonIgnore
 	private Set<User> mUsers = new HashSet<>();
 	
 	public void setId(Long id) {
@@ -53,6 +56,7 @@ public class Group {
 		this.mName = name;
 	}
 	
+	@JsonIgnore
 	public Set<User> getUser() {
 		return mUsers;
 	}

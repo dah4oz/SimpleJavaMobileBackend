@@ -62,27 +62,36 @@ public class User {
 	public String getName() {
 		return mName;
 	}
+	
 	public void setName(String name) {
 		this.mName = name;
 	}
+	
 	public int getAge() {
 		return mAge;
 	}
+	
 	public void setAge(int age) {
 		this.mAge = age;
 	}
+	
 	public String getEmail() {
 		return mEmail;
 	}
+	
 	public void setEmail(String mail) {
 		this.mEmail = mail;
 	}
+	
 	public String getUsername() {
 		return mUsername;
 	}
+	
 	public void setUsername(String username) {
 		this.mUsername = username;
 	}
+	
+	@JsonIgnore
 	public String getPassword() {
 		return mPassword;
 	}
@@ -113,5 +122,14 @@ public class User {
 	public void removePlot(Plot plot) {
 		this.mPlots.remove(plot);
 	}
+
+	@Override
+	public String toString() {
+		return "User [mId=" + this.mId + ", mName=" + this.mName + ", mAge=" + this.mAge + ", mEmail=" + this.mEmail
+				+ ", mUsername=" + this.mUsername + ", mPassword=" + this.mPassword + ", mPlots=" + this.mPlots
+				+ ", mGroups=" + this.mGroups + "]";
+	}
+	
+	
 	
 }
